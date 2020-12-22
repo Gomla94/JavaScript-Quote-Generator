@@ -43,7 +43,6 @@ async function getQuote() {
 
 
 // twitter function
-
 function quoteToTwitter() {
     const quote = quoteText.textContent;
     const author = quoteAuthor.textContent;
@@ -52,6 +51,7 @@ function quoteToTwitter() {
 }
 
 
+//show the loader then run the getQuote function
 function showLoader() {
     loader.hidden = false;
     quoteContainer.hidden = true;
@@ -61,6 +61,8 @@ function showLoader() {
 
 }
 
+
+//hide the loader then show the quote container
 function hideLoader() {
     loader.hidden = true;
     quoteContainer.hidden = false;
