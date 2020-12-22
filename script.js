@@ -3,10 +3,11 @@ const quoteText = document.getElementById('quote');
 const quoteAuthor = document.getElementById('quote-author');
 const TwiteerBtn = document.getElementById('twitter');
 const quoteBtn = document.getElementById('quote-btn');
-
+const loader = document.getElementById('loader');
 
 // Get Quotes
 async function getQuote() {
+    loader.hidden = true
     // const corsUrl = 'https://cors-anywhere.herokuapp.com/';
     const corsUrl = 'https://api.allorigins.win/get?url=';
 
@@ -34,6 +35,7 @@ async function getQuote() {
             quoteText.classList.remove('long-quote');
         }
         quoteText.textContent = quote;
+        hideLoader();
     } catch (error) {
         console.log('error occurs', error);
     }
@@ -45,14 +47,29 @@ async function getQuote() {
 function quoteToTwitter() {
     const quote = quoteText.textContent;
     const author = quoteAuthor.textContent;
-
     const twitterUrl = `https://twitter.com/intent/tweet?text=${quote} - ${author}`;
     window.open(twitterUrl, '_blank');
 }
 
+
+function showLoader() {
+    loader.hidden = false;
+    quoteContainer.hidden = true;
+    timer = setTimeout(() => {
+        getQuote();
+    }, 1000)
+
+}
+
+function hideLoader() {
+    loader.hidden = true;
+    quoteContainer.hidden = false;
+
+}
+
 // events and listeners
 TwiteerBtn.addEventListener('click', quoteToTwitter);
-quoteBtn.addEventListener('click', getQuote);
+quoteBtn.addEventListener('click', showLoader);
 
 getQuote();
 
