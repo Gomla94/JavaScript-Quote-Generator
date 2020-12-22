@@ -8,10 +8,6 @@ const loader = document.getElementById('loader');
 // Get Quotes
 async function getQuote() {
     loader.hidden = true
-    // const corsUrl = 'https://cors-anywhere.herokuapp.com/';
-    const corsUrl = 'https://api.allorigins.win/get?url=';
-
-    // const apiUrl = 'https://api.whatdoestrumpthink.com/api/v1/quotes/random';
     const apiUrl = 'https://goquotes-api.herokuapp.com/api/v1/random?count=1';
 
     try {
@@ -50,9 +46,7 @@ function quoteToTwitter() {
     window.open(twitterUrl, '_blank');
 }
 
-
-//show the loader then run the getQuote function
-function showLoader() {
+function showLoaderAndGetQuote() {
     loader.hidden = false;
     quoteContainer.hidden = true;
     timer = setTimeout(() => {
@@ -61,8 +55,6 @@ function showLoader() {
 
 }
 
-
-//hide the loader then show the quote container
 function hideLoader() {
     loader.hidden = true;
     quoteContainer.hidden = false;
@@ -71,7 +63,7 @@ function hideLoader() {
 
 // events and listeners
 TwiteerBtn.addEventListener('click', quoteToTwitter);
-quoteBtn.addEventListener('click', showLoader);
+quoteBtn.addEventListener('click', showLoaderAndGetQuote);
 
 getQuote();
 
